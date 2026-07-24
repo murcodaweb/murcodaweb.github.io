@@ -86,7 +86,7 @@ body:
     id: console
     attributes:
       label: Ошибки в консоли браузера
-      description: Если умеете: откройте консоль и скопируйте сюда ошибки. Если нет — можно пропустить
+      description: Откройте консоль и скопируйте сюда ошибки
 
   - type: textarea
     id: additions
