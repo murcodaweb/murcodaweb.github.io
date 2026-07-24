@@ -31,7 +31,6 @@ body:
     id: url
     attributes:
       label: Ссылка на страницу с проблемой
-      placeholder: https://murcodaweb.github.io/
     validations:
       required: true
 
@@ -66,7 +65,6 @@ body:
     id: os
     attributes:
       label: Операционная система
-      placeholder: Windows 10, Windows 11, macOS 14, Android 13 и т. д.
     validations:
       required: true
 
@@ -75,7 +73,6 @@ body:
     attributes:
       label: Шаги для воспроизведения
       description: Опишите, что нужно сделать, чтобы увидеть проблему (по шагам)
-      placeholder: 1. Открыл главную страницу. 2. Нажал на кнопку. 3. Кнопка не реагирует
     validations:
       required: true
 
@@ -84,17 +81,15 @@ body:
     attributes:
       label: Скриншоты / ссылки на изображения
       description: Можно вставить скриншот прямо в поле или дать ссылку на картинку
-      placeholder: Ссылка или описание: «Скриншот 1: кнопка неактивна»
 
   - type: textarea
     id: console
     attributes:
       label: Ошибки в консоли браузера
       description: Если умеете: откройте консоль (F12 → Console) и скопируйте сюда ошибки. Если нет — можно пропустить
-      placeholder: Uncaught TypeError: Cannot read property 'click' of null
 
   - type: textarea
     id: additions
     attributes:
       label: Дополнительные детали
-      description: Всё, что может помочь (например: «только в мобильной версии», «проблема появилась после вчерашнего обновления»)
+      description: Всё, что может помочь
