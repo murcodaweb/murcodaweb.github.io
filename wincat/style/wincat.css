@@ -1,0 +1,14 @@
+/*
+  WIN CAT STYLES
+  © 2026 ООО «MurCoda»
+  © 2026 FelineAPI
+*/
+:root {
+  --wincat-accent: #90FF90;
+  .wincat-content-light {
+    --wincat-bg: #0f0f12;
+  }
+  .wincat-content-dark {
+    --wincat-bg: #f5f7fa;
+  }
+}
