@@ -57,7 +57,7 @@ body:
         - Edge
         - Firefox
         - Safari
-        - Яндекс Браузер
+        - Яндекс Браузер
         - Другое
     validations:
       required: true
@@ -83,14 +83,14 @@ body:
     id: screenshots
     attributes:
       label: Скриншоты / ссылки на изображения
-      description: Можно вставить скриншот прямо в поле или дать ссылку на картинку (GitHub, Imgur и т. п.)
-      placeholder: Ссылка или описание: «Скриншот 1: кнопка неактивна», «Скриншот 2: ошибка в консоли»
+      description: Можно вставить скриншот прямо в поле или дать ссылку на картинку
+      placeholder: Ссылка или описание: «Скриншот 1: кнопка неактивна»
 
   - type: textarea
     id: console
     attributes:
       label: Ошибки в консоли браузера
-      description: Если умеете: откройте консоль (F12 → Console) и скопируйте сюда ошибки. Если нет — можно пропустить
+      description: Если умеете: откройте консоль (F12 → Console) и скопируйте сюда ошибки. Если нет — можно пропустить
       placeholder: Uncaught TypeError: Cannot read property 'click' of null
 
   - type: textarea
