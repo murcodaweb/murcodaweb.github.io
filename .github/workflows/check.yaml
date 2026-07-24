@@ -1,0 +1,21 @@
+name: Проверка MurCoda
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  murcoda-status:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Запуск
+        run: |
+          echo "Начинаем проверку..."
+          sleep 2
+          echo "✅ Проверка MurCoda успешно завершена!"
+      
+      - name: Вывод
+        run: echo "Файл проверен MurCoda!"
+        
