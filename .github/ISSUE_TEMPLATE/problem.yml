@@ -1,0 +1,98 @@
+name: 🖥 Проблема на сайте
+title: '[Проблема] '
+description: Сообщите о проблеме, которую вы нашли на сайте компании
+labels: ['type: проблема', 'status: нуждается в сортировке', 'area: сайт']
+
+body:
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: ⚠️ Перед отправкой
+      description: Пожалуйста, проверьте эти пункты
+      options:
+        - label: Я проверил, повторяется ли проблема в другом браузере (Chrome, Edge, Firefox)
+        - label: Я убедился, что сайт принудительно обновлён (Ctrl+F5)
+        - label: Я не использую блокировщики рекламы/скриптов (AdBlock, uBlock и т. п.) и не отключён JavaScript
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Описание проблемы
+      description: Напишите, что именно не работает и что вы ожидали увидеть
+      placeholder: Например: «При нажатии кнопки “Скачать” ничего не происходит, а я ожидал, что начнётся загрузка файла»
+    validations:
+      required: true
+
+  - type: input
+    id: url
+    attributes:
+      label: Ссылка на страницу с проблемой
+      placeholder: https://murcodaweb.github.io/
+    validations:
+      required: true
+
+  - type: dropdown
+    id: device
+    attributes:
+      label: Устройство
+      description: Это поможет быстрее понять причину
+      options:
+        - ПК (Windows)
+        - ПК (macOS)
+        - Планшет
+        - Телефон
+        - Другое
+    validations:
+      required: true
+
+  - type: dropdown
+    id: browser
+    attributes:
+      label: Браузер
+      options:
+        - Chrome
+        - Edge
+        - Firefox
+        - Safari
+        - Яндекс Браузер
+        - Другое
+    validations:
+      required: true
+
+  - type: input
+    id: os
+    attributes:
+      label: Операционная система
+      placeholder: Windows 10, Windows 11, macOS 14, Android 13 и т. д.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Шаги для воспроизведения
+      description: Опишите, что нужно сделать, чтобы увидеть проблему (по шагам)
+      placeholder: 1. Открыл главную страницу. 2. Нажал на кнопку. 3. Кнопка не реагирует
+    validations:
+      required: true
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Скриншоты / ссылки на изображения
+      description: Можно вставить скриншот прямо в поле или дать ссылку на картинку (GitHub, Imgur и т. п.)
+      placeholder: Ссылка или описание: «Скриншот 1: кнопка неактивна», «Скриншот 2: ошибка в консоли»
+
+  - type: textarea
+    id: console
+    attributes:
+      label: Ошибки в консоли браузера
+      description: Если умеете: откройте консоль (F12 → Console) и скопируйте сюда ошибки. Если нет — можно пропустить
+      placeholder: Uncaught TypeError: Cannot read property 'click' of null
+
+  - type: textarea
+    id: additions
+    attributes:
+      label: Дополнительные детали
+      description: Всё, что может помочь (например: «только в мобильной версии», «проблема появилась после вчерашнего обновления»)
+      
