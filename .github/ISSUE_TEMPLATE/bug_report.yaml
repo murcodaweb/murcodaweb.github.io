@@ -24,7 +24,6 @@ body:
     attributes:
       label: Описание проблемы
       description: Напишите, что именно не работает и что вы ожидали увидеть
-      placeholder: Например: кнопка не работает, должна была быть загрузка
     validations:
       required: true
 
