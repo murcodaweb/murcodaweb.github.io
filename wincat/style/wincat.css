@@ -5,6 +5,7 @@
 */
 :root {
   --wincat-accent: #90FF90;
+  --wincat-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
   .wincat-content-light {
     --wincat-bg: #0f0f12;
   }
