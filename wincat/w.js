@@ -56,3 +56,4 @@ function set(s, e, t) {
 function r() {
   r();
 }
+set(1, 'wincat-title', 'MurCoda • Главная');
