@@ -1,51 +1,62 @@
 name: [MurCoda] Резервное копирование
+
 on:
   schedule:
     - cron: "0 0 * * *"
   workflow_dispatch:
+
 jobs:
   backup:
     runs-on: ubuntu-latest
+
     steps:
       - name: [MurCoda] Получение репозитория
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: [MurCoda] Подготовление директории для бэкапа
+
+      - name: [MurCoda] Подготовка директорий
         run: |
-          mkdir -p backup/
-      - name: [MurCoda] Чтения текущего номера бэкапа
+          mkdir -p backup/latest
+
+      - name: [MurCoda] Чтение текущего номера бэкапа
         id: read-number
         shell: bash
         run: |
-          if [ -f "backup/latest" ]; then
-            current_number=$(cat "backup/latest")
+          if [ -f "backup/number.txt" ]; then
+            current_number=$(cat "backup/number.txt")
             echo "current_number=$current_number" >> "$GITHUB_OUTPUT"
           else
             echo "current_number=1" >> "$GITHUB_OUTPUT"
           fi
+
       - name: [MurCoda] Создание папки для текущего бэкапа
         id: create-folder
         shell: bash
         run: |
           current_number="${{ steps.read-number.outputs.current_number }}"
-          backup_dir="backup/${current_number}/"
+          backup_dir="backup/${current_number}"
+
           mkdir -p "$backup_dir"
+
           echo "backup_dir=$backup_dir" >> "$GITHUB_OUTPUT"
           echo "used_number=$current_number" >> "$GITHUB_OUTPUT"
-      - name: [MurCoda] Бекап
+
+      - name: [MurCoda] Копирование кода в бэкап
         shell: bash
         run: |
           backup_dir="${{ steps.create-folder.outputs.backup_dir }}"
+
           rsync -a --exclude='backup/' . "$backup_dir"
 
-      - name: [MurCoda] Записать следующий номер в number.txt
+      - name: [MurCoda] Запись следующего номера
         shell: bash
         run: |
           used_number="${{ steps.create-folder.outputs.used_number }}"
           next_number=$((used_number + 1))
-          echo "$next_number" > "backup/latest"
-      - name: [MurCoda] Коммит
+          echo "$next_number" > "backup/number.txt"
+
+      - name: [MurCoda] Коммит изменений
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "[MurCoda] Бэкап #${{ steps.create-folder.outputs.used_number }}"
