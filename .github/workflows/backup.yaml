@@ -36,9 +36,7 @@ jobs:
         run: |
           current_number="${{ steps.read-number.outputs.current_number }}"
           backup_dir="backup/${current_number}"
-
           mkdir -p "$backup_dir"
-
           echo "backup_dir=$backup_dir" >> "$GITHUB_OUTPUT"
           echo "used_number=$current_number" >> "$GITHUB_OUTPUT"
 
@@ -46,7 +44,6 @@ jobs:
         shell: bash
         run: |
           backup_dir="${{ steps.create-folder.outputs.backup_dir }}"
-
           rsync -a --exclude='backup/' . "$backup_dir"
 
       - name: [MurCoda] Запись следующего номера
