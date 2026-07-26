@@ -1,0 +1,83 @@
+name: [MurCoda] Info
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  write-js:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: [MurCoda] 1
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: [MurCoda] 2
+        id: make-vars
+        shell: bash
+        run: |
+          cat > wincattemp.js <<EOF
+// INFO START
+let wincat_owner = "${{ github.repository_owner }}";
+let wincat_repo = "${{ github.event.repository.name }}";
+let wincat_fullRepo = "${{ github.repository }}";
+let wincat_branch = "${{ github.ref_name }}";
+let wincat_sha = "${{ github.sha }}";
+let wincat_event = "${{ github.event_name }}";
+let wincat_createdAt = "$(date -u +"%Y-%m-%dT%H:%M:%SZ")";
+let wincat_url = "https://github.com/${{ github.repository }}";
+// INFO END
+EOF
+
+      - name: [MurCoda] 3
+        shell: bash
+        run: |
+          input="repo.js"
+          temp=".wincattemp.js"
+
+          if [ ! -f "$input" ]; then
+            echo "// INFO START" > "$input"
+            echo "// INFO END" >> "$input"
+          fi
+          
+          if grep -q "// INFO START" "$input" && grep -q "// INFO END" "$input"; then
+            head_part=$(sed '/\/\/ INFO START/q' "$input")
+
+            tail_part=$(tail -n +$(($(grep -n "// INFO END" "$input" | head -1 | cut -d: -f1) + 1)) "$input" 2>/dev/null || echo "")
+
+            {
+              echo "$head_part"
+              cat "$temp"
+              if [ -n "$tail_part" ]; then
+                echo "$tail_part"
+              fi
+            } > "$input.new"
+
+            mv "$input.new" "$input"
+          else
+            cat >> "$input" <<EOF
+
+// INFO START
+let wincat_owner = "${{ github.repository_owner }}";
+let wincat_repo = "${{ github.event.repository.name }}";
+let wincat_fullRepo = "${{ github.repository }}";
+let wincat_branch = "${{ github.ref_name }}";
+let wincat_sha = "${{ github.sha }}";
+let wincat_event = "${{ github.event_name }}";
+let wincat_createdAt = "$(date -u +"%Y-%m-%dT%H:%M:%SZ")";
+let wincat_url = "https://github.com/${{ github.repository }}";
+// INFO END
+EOF
+          fi
+
+      - name: [MurCoda] 4
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "[MurCoda] INFO"
+          branch: main
+          file_pattern: "repo-info.js"
