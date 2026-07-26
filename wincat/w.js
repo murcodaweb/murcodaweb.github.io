@@ -37,7 +37,7 @@ function error(c, l) {
   };
   err = errors[String(c)];
   a = err[l];
-  console.error('[' + l '] [MurCoda] ' + a)
+  console.error('[' + l '] [MurCoda] ' + a);
   set(1, 'wincat-root', a);
   if (l === 'ru') {
     set(1, 'wincat-title', 'MurCoda • Ошибка' + c);
